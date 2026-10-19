@@ -1,0 +1,28 @@
+.searchBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  gap: 10px; /* 设置间距 */
+}
+
+.input {
+  flex: 1;
+  min-width: 600px;
+}
+
+.button {
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+/* 自定义下拉菜单样式 */
+:global(.ant-select-dropdown) {
+  border-radius: 8px;
+}
+
+:global(.ant-select-item-option-content) {
+  padding: 8px 12px;
+}

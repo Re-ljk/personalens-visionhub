@@ -1,0 +1,103 @@
+# Local archives, documents, and preserved upstream Git metadata
+/resources/
+
+# Dependencies and build output
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Python environments and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Datasets, pretrained encoders, and generated annotations
+/flask/data/
+/flask/CFine/data/
+/flask/cuhkpedes/
+/flask/CFine/cuhkpedes/
+/flask/ufine6926/
+
+# Model weights and feature caches
+checkpoints/
+extracted_features/
+*.pth
+*.pth.*
+*.pt
+*.pt.*
+*.ckpt
+*.ckpt.*
+*.bin
+*.safetensors
+*.onnx
+*.npz
+*.npy
+*.pb
+*.tfrecord
+*.tfrecords
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+
+# Retrieval output and local logs
+retrieval_results/
+top10_results_sample/
+top10_retrieval_results.json
+temp_query.json
+temp_stdout.log
+temp_stderr.log
+logs/
+*.log
+/flask/ls.txt
+
+# Compressed distributions
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+
+# Private configuration; example files remain publishable
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local preprocessing scripts containing embedded credentials.
+# Keep private until the credentials have been removed and rotated.
+/flask/datasets/preprocess_5SubSpace
+/flask/datasets/preprocess_5SubSpace.py
+/flask/datasets/preprocess_5SubSpace_ICFG.py
+/flask/datasets/preprocess_5SubSpace_RSTP.py
+/flask/datasets/preprocess_5SubSpace_UFine.py
+/flask/datasets/preprocess_demo.py
+
+# Machine-specific or empty research helpers; keep local for now
+/flask/debugproxy.py
+/flask/countwords.py
+/flask/sample_tiqu.py
+/flask/wordprocess.py
+/flask/CFine/extract_test_samples.py
+
+# Keep the unused redacted preview local; publish the requested system screenshots.
+/images/retrieval-preview.png
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Do not import nested repository metadata
+**/.git/

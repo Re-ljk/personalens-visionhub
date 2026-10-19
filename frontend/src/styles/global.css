@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* 确保 Ant Design 组件也使用全屏 */
+.ant-app {
+  height: 100%;
+  width: 100%;
+}
