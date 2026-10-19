@@ -19,9 +19,9 @@ env/
 
 # Datasets, pretrained encoders, and generated annotations
 /flask/data/
-/flask/CFine/data/
+/flask/Baseline/data/
 /flask/cuhkpedes/
-/flask/CFine/cuhkpedes/
+/flask/Baseline/cuhkpedes/
 /flask/ufine6926/
 
 # Model weights and feature caches
@@ -86,7 +86,7 @@ logs/
 /flask/countwords.py
 /flask/sample_tiqu.py
 /flask/wordprocess.py
-/flask/CFine/extract_test_samples.py
+/flask/Baseline/extract_test_samples.py
 
 # Keep the unused redacted preview local; publish the requested system screenshots.
 /images/retrieval-preview.png

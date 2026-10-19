@@ -120,7 +120,7 @@ PersonaLens VisionHub 当前用于已有图库与描述索引的检索展示。
 | 推理资源 | 供后端检索服务加载使用 |
 | 日志目录 | 保存服务运行时的诊断信息 |
 
-具体位置见 [Ours 运行配置](flask/test_config.py)与 [Baseline 运行配置](flask/CFine/test_config.py)。两路服务分别读取各自的资源，请确认文件完整、版本匹配且路径可访问。
+具体位置见 [Ours 运行配置](flask/test_config.py)与 [Baseline 运行配置](flask/Baseline/test_config.py)。两路服务分别读取各自的资源，请确认文件完整、版本匹配且路径可访问。
 
 ### 启动前检查
 

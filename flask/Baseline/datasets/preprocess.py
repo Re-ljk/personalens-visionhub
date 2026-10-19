@@ -333,9 +333,9 @@ def process_data(args):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Command for data preprocessing')
-    parser.add_argument('--img_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/flask/CFine/data/CUHK-PEDES/imgs/')
-    parser.add_argument('--json_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/flask/CFine/data/CUHK-PEDES/reid_raw_demo.json')
-    parser.add_argument('--out_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/CFine/cuhkpedes/processed_data_1000')
+    parser.add_argument('--img_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/flask/Baseline/data/CUHK-PEDES/imgs/')
+    parser.add_argument('--json_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/flask/Baseline/data/CUHK-PEDES/reid_raw_demo.json')
+    parser.add_argument('--out_root', type=str, default='/mnt/disk2/postgraduates/2024/lishuangle/Python/I2T/Baseline/cuhkpedes/processed_data_1000')
     parser.add_argument('--min_word_count', type=int, default=3)
     parser.add_argument('--default_image_size', type=int, default=224)
     parser.add_argument('--load_split', action='store_true')

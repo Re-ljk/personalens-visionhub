@@ -1,8 +1,8 @@
 BASE_ROOT=.
 
 # 手动修改数据集路径
-IMAGE_ROOT=F:\MAR-REID\reference\CFine\data\CUHK-PEDES\imgs
-JSON_ROOT=F:\MAR-REID\reference\CFine\data\CUHK-PEDES\reid_raw.json
+IMAGE_ROOT=F:\MAR-REID\reference\Baseline\data\CUHK-PEDES\imgs
+JSON_ROOT=F:\MAR-REID\reference\Baseline\data\CUHK-PEDES\reid_raw.json
 OUT_ROOT=$BASE_ROOT/cuhkpedes/processed_data
 
 

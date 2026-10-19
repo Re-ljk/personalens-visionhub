@@ -37,7 +37,7 @@ def images_text_retrieval():
         if model_type in ('Ours', 'ours', 'AMDS', 'amds'):
             return handle_amds_model(search_text)
         elif model_type in ('Baseline', 'baseline', 'CFine', 'cfine'):
-            return handle_cfine_model(search_text)
+            return handle_baseline_model(search_text)
         else:
             return jsonify({'error': '不支持的模型类型'}), 400
             
@@ -200,38 +200,37 @@ def handle_amds_model(search_text):
         traceback.print_exc()
         return jsonify({"error": f"服务器内部错误: {str(e)}"}), 500
 
-def handle_cfine_model(search_text):
-    """处理CFine模型的请求"""
+def handle_baseline_model(search_text):
+    """处理Baseline模型的请求"""
     try:
-        # CFine模型的处理逻辑
-        cfine_dir = './CFine'
+        baseline_dir = os.path.join(script_dir, 'Baseline')
         
-        # 检查CFine目录是否存在
-        if not os.path.exists(cfine_dir):
-            print(f"CFine目录不存在: {cfine_dir}")
-            return jsonify({'error': 'CFine目录不存在'}), 404
+        # 检查Baseline目录是否存在
+        if not os.path.exists(baseline_dir):
+            print(f"Baseline目录不存在: {baseline_dir}")
+            return jsonify({'error': 'Baseline目录不存在'}), 404
         
-        print(f"CFine目录存在，准备切换到: {cfine_dir}")
+        print(f"Baseline目录存在，准备切换到: {baseline_dir}")
         
-        # 切换到CFine目录
+        # 切换到Baseline目录
         original_dir = os.getcwd()
         print(f"当前目录: {original_dir}")
-        os.chdir(cfine_dir)
-        print(f"已切换到CFine目录: {os.getcwd()}")
+        os.chdir(baseline_dir)
+        print(f"已切换到Baseline目录: {os.getcwd()}")
         
         try:
-            # 读取CFine的JSON文件
-            cfine_json_path = './data/CUHK-PEDES/caption_all.json'
-            print(f"准备读取CFine数据文件: {cfine_json_path}")
+            # 读取Baseline的JSON文件
+            baseline_json_path = './data/CUHK-PEDES/caption_all.json'
+            print(f"准备读取Baseline数据文件: {baseline_json_path}")
             
-            if not os.path.exists(cfine_json_path):
-                print(f"CFine数据文件不存在: {cfine_json_path}")
-                return jsonify({'error': f'CFine数据文件不存在: {cfine_json_path}'}), 404
+            if not os.path.exists(baseline_json_path):
+                print(f"Baseline数据文件不存在: {baseline_json_path}")
+                return jsonify({'error': f'Baseline数据文件不存在: {baseline_json_path}'}), 404
                 
-            with open(cfine_json_path, 'r', encoding='utf-8') as f:
+            with open(baseline_json_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
-            print(f"成功读取CFine数据，共 {len(data)} 条记录")
+            print(f"成功读取Baseline数据，共 {len(data)} 条记录")
             
             # 查找匹配的条目
             matched_items = []
@@ -260,7 +259,7 @@ def handle_cfine_model(search_text):
             try:
                 # 打开用于重定向的日志文件
                 with open(stdout_log_path, 'wb') as stdout_log, open(stderr_log_path, 'wb') as stderr_log:
-                    print(f"执行CFine test.py，查询文件: {new_json_path}, stdout日志: {stdout_log_path}, stderr日志: {stderr_log_path}")
+                    print(f"执行Baseline test.py，查询文件: {new_json_path}, stdout日志: {stdout_log_path}, stderr日志: {stderr_log_path}")
                     result = subprocess.run([
                         'python', 'test.py'
                     ], 
@@ -276,15 +275,15 @@ def handle_cfine_model(search_text):
                 with open(stderr_log_path, 'r', encoding='utf-8', errors='replace') as f:
                     stderr_str = f.read()
 
-                print("--- CFine test.py STDOUT (from file) ---")
+                print("--- Baseline test.py STDOUT (from file) ---")
                 print(stdout_str)
-                print("--- CFine test.py STDERR (from file) ---")
+                print("--- Baseline test.py STDERR (from file) ---")
                 print(stderr_str)
-                print(f"--- CFine test.py 返回码: {result.returncode} ---")
+                print(f"--- Baseline test.py 返回码: {result.returncode} ---")
 
                 if result.returncode != 0:
                     return jsonify({
-                        'error': f'CFine测试执行失败。请查看服务器日志获取详细的 stdout 和 stderr。',
+                        'error': f'Baseline测试执行失败。请查看服务器日志获取详细的 stdout 和 stderr。',
                         'stdout': stdout_str,
                         'stderr': stderr_str,
                         'returncode': result.returncode
@@ -297,21 +296,21 @@ def handle_cfine_model(search_text):
                 with open(stderr_log_path, 'r', encoding='utf-8', errors='replace') as f:
                     stderr_str = f.read()
 
-                print("--- CFine test.py 执行超时 ---")
+                print("--- Baseline test.py 执行超时 ---")
                 print("--- TIMEOUT STDOUT (from file) ---")
                 print(stdout_str)
                 print("--- TIMEOUT STDERR (from file) ---")
                 print(stderr_str)
 
                 return jsonify({
-                    'error': '执行 CFine test.py 超时',
+                    'error': '执行 Baseline test.py 超时',
                     'stdout': stdout_str,
                     'stderr': stderr_str
                 }), 504
 
             except Exception as e:
-                print(f"执行 CFine test.py 时发生未知错误: {e}")
-                return jsonify({'error': f'执行 CFine test.py 时发生未知错误: {str(e)}'}), 500
+                print(f"执行 Baseline test.py 时发生未知错误: {e}")
+                return jsonify({'error': f'执行 Baseline test.py 时发生未知错误: {str(e)}'}), 500
             
             finally:
                 # 确保临时日志文件被清理
@@ -340,7 +339,8 @@ def handle_cfine_model(search_text):
                     'matched_items_count': len(matched_items),
                     'results_dir_exists': os.path.exists(results_dir),
                     'model': 'Baseline',
-                    'cfine_dir': cfine_dir
+                    'baseline_dir': baseline_dir,
+                    'cfine_dir': baseline_dir  # 保留旧响应字段以兼容已有调用方
                 }
             })
             
@@ -350,13 +350,13 @@ def handle_cfine_model(search_text):
             print(f"已恢复到原始目录: {original_dir}")
         
     except subprocess.TimeoutExpired:
-        print("CFine test.py执行超时，正在终止进程...")
-        return jsonify({"error": "CFine test.py执行超时，请稍后重试"}), 500
+        print("Baseline test.py执行超时，正在终止进程...")
+        return jsonify({"error": "Baseline test.py执行超时，请稍后重试"}), 500
     except Exception as e:
-        print(f"处理CFine模型时发生错误: {str(e)}")
+        print(f"处理Baseline模型时发生错误: {str(e)}")
         import traceback
         traceback.print_exc()
-        return jsonify({"error": f"CFine模型处理失败: {str(e)}"}), 500
+        return jsonify({"error": f"Baseline模型处理失败: {str(e)}"}), 500
 
 def modify_test_py_for_amds(new_json_path):
     """修改test.py文件中的sample_json_path"""
